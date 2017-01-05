@@ -13,8 +13,12 @@ public:
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
+	void InitMenu();
+
+	void onFinishSplash(float dt);
     // implement the "static create()" method manually
     CREATE_FUNC(MainMenu);
 };
+
 
 #endif // __MAINMENU_H__

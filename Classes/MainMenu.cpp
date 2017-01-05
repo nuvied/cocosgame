@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "SimpleAudioEngine.h"
 
+
 USING_NS_CC;
 
 Scene* MainMenu::createScene()
@@ -37,7 +38,7 @@ bool MainMenu::init()
 
     // add a "close" icon to exit the progress. it's an autorelease object
 
-	auto colorLayer = LayerColor::create(Color4B(30,30,30,255));
+	auto colorLayer = LayerColor::create(Color4B(30,40,50,255));
 	
 	
 	this->addChild(colorLayer);
@@ -73,17 +74,41 @@ bool MainMenu::init()
 	
 
     // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+    auto sprite = Sprite::create("Windmill Splash 1.png");
+
 
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
     // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    this->addChild(sprite, 0,0);
+
+	auto fan = Sprite::create("Windmill Splash-JustFan.png");
+	fan->setPosition(sprite->getContentSize().width - 112, sprite->getContentSize().height - 20);
+	sprite->addChild(fan);
+	//sprite->retain();
+	sprite->runAction(ScaleTo::create(4, .7));
+	fan->runAction(RepeatForever::create(RotateBy::create(2, 360)));
+
+	scheduleOnce(schedule_selector(MainMenu::onFinishSplash), 5);
     
     return true;
 }
 
+
+void MainMenu::onFinishSplash(float dt)
+{
+	auto sprite = (Sprite*)this->getChildByTag(0);
+
+	sprite->runAction(MoveTo::create(2, Vec2(70, 30)));
+	sprite->runAction(ScaleTo::create(1.8, .3));
+
+}
+
+void MainMenu::InitMenu()
+{
+
+}
 
 void MainMenu::menuCloseCallback(Ref* pSender)
 {
