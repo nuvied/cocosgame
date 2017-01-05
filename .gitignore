@@ -3,6 +3,8 @@ Build/
 build/
 bin/
 Bin/
-proj.android/
+proj.android/bin/
+proj.android/obj/
+proj.android/assets/
 proj.win32/
 proj.ios_mac/
